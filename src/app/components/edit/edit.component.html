@@ -1,0 +1,22 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    {{ title }}
+  </div>
+  <div class="panel-body">
+    <form [formGroup]="angForm" novalidate>
+      <div class="form-group">
+        <label class="col-md-4">Todo</label>
+        <input type="text" class="form-control" formControlName="todo" #todo [(ngModel)] = "todo.title"/>
+      </div>
+      <div *ngIf="angForm.controls['todo'].invalid && (angForm.controls['todo'].dirty || angForm.controls['todo'].touched)" class="alert alert-danger">
+        <div *ngIf="angForm.controls['todo'].errors.required">
+          Can not be empty.
+        </div>
+      </div>
+      
+        <div class="form-group">
+          <button type="button" (click)="updateTodo(todo.value)" [disabled]="angForm.pristine || angForm.invalid" class="btn btn-primary">Update</button>
+        </div>
+    </form>
+  </div>
+</div>
