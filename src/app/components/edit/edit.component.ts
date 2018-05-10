@@ -22,13 +22,12 @@ export class EditComponent implements OnInit {
       todo: ['', Validators.required ]
    });
   }
-
-  updateTodo(name) {
+  updateTodoTitle(title){
     this.route.params.subscribe(params => {
-      this.service.updateTodo(name, this.todo.id);
+      this.service.updateTodo(title, this.todo.completed, this.todo.id);
       this.router.navigate(['index']);
   });
-}
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params => {

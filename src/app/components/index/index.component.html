@@ -4,7 +4,7 @@
       <td>User ID</td>
       <td>Todo</td>
       <td>Completed</td>
-      <td colspan="2">Actions</td>
+      <td colspan="3"></td>
   </tr>
   </thead>
 
@@ -15,6 +15,10 @@
           <td>{{ todo.completed }}</td>
           <td><a [routerLink]="['/edit', todo.id]" class="btn btn-primary">Edit</a></td>
           <td><button (click)="deleteTodo(todo.id)"  class="btn btn-danger">Delete</button></td>
+          <td><div *ngIf="!todo.completed;then complete_button else incomplete_button"></div></td>
+
+          <ng-template #complete_button><button (click)="toggleComplete(todo.title,todo.completed,todo.id)" class="btn btn-warning">Set Completed</button></ng-template>
+          <ng-template #incomplete_button><button (click)="toggleComplete(todo.title,todo.completed,todo.id)" class="btn btn-info">Set uncompleted</button></ng-template>
       </tr>
   </tbody>
 </table>

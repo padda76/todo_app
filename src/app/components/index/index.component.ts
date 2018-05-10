@@ -16,7 +16,13 @@ export class IndexComponent implements OnInit {
   constructor(private http: HttpClient, private service: TodoService) {}
 
   ngOnInit() {
-    this.getTodos();
+    this.waitAndGetTodos();
+  }
+
+  waitAndGetTodos(){
+    setTimeout(() => {
+      this.getTodos();
+    },500)
   }
 
   getTodos() {
@@ -27,7 +33,13 @@ export class IndexComponent implements OnInit {
 
   deleteTodo(id) {
     this.service.deleteTodo(id).subscribe(res => {
-      console.log('Deleted');
+      console.log('Deleted id '+id);
     });
+    this.waitAndGetTodos();
+  }
+
+  toggleComplete(title,completed,id){
+    this.service.updateTodo(title,!completed,id);
+    this.waitAndGetTodos();
   }
 }
